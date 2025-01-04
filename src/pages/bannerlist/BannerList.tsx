@@ -43,14 +43,14 @@ const BannerList = () => {
                   {Object.values(item).map((element) => (
                     <td className='border text-center p-3'>{element}</td>
                   ))}
-                  <td className='border text-center p-3'>
+                  <td className='border text-center p-3 w-20'>
                     <Link to={`/edit/${item.id}`}>
                       <button className='bg-green-300 border-none px-2 py-1 rounded-md hover:bg-green-500 text-sm text-white'>
-                      수정
+                        수정
                       </button>
                     </Link>
                   </td>
-                  <td className='border text-center p-3'>
+                  <td className='border text-center p-3 w-20'>
                     <button
                       onClick={() => handleDelete(item.id)}
                       className='bg-red-400  border-none px-2 py-1 rounded-md hover:bg-red-600 text-sm text-white'
