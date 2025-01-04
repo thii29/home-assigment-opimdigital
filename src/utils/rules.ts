@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 
 export const createBannerSchema = yup.object({
+  id: yup.number(),
   bannerName: yup.string().required('이 필드는 필수입니다'),
   link: yup.string().required('이 필드는 필수입니다'),
   order: yup
@@ -15,8 +16,9 @@ export const createBannerSchema = yup.object({
       }
     }),
   bannerType: yup.string().required('이 필드는 필수입니다'),
-  texts : yup.array().default([]),
-  status: yup.string().required('이 필드는 필수입니다')
+  texts: yup.array().default([]),
+  status: yup.string().required('이 필드는 필수입니다'),
+  image: yup.string()
 })
 
 export type CreateBannerSchemaType = yup.InferType<typeof createBannerSchema>

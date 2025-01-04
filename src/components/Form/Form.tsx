@@ -22,9 +22,9 @@ function Form({ isEdit = false, bannerValue }: FormProps) {
   const [file, setFile] = useState<File>()
   const [imgUrl, setImgUrl] = useState('')
   const previewImg = useMemo(() => {
-    return file ? URL.createObjectURL(file) : ''
+    return file ? URL.createObjectURL(file) : bannerValue?.image || ''
   }, [file])
-  const { handleCreate } = useContext(BannerContext)
+  const { handleCreate, handleEdit } = useContext(BannerContext)
   const navigate = useNavigate()
   const defaultValue = bannerValue
     ? bannerValue
@@ -62,16 +62,23 @@ function Form({ isEdit = false, bannerValue }: FormProps) {
   const onSubmit = (values: CreateBannerSchemaType) => {
     const bannerDataSubmit: ListType = {
       ...values,
-      id: Date.now(),
+      id: defaultValue?.id ? defaultValue.id : Date.now(),
       order: Number(values.order),
       dateRegister: dayjs(Date.now()).format('YYYY-MM-DD'),
-      image: imgUrl
+      image: imgUrl || defaultValue?.image || ''
     }
-    handleCreate(bannerDataSubmit)
+    if (isEdit && defaultValue.id) {
+      handleEdit(defaultValue?.id, bannerDataSubmit)
+      toast.success('Edit success!', {
+        position: 'top-right'
+      })
+    } else {
+      handleCreate(bannerDataSubmit)
+      toast.success('Register success!', {
+        position: 'top-right'
+      })
+    }
     navigate('/')
-    toast.success('Register success!', {
-      position: 'top-right'
-    })
   }
   return (
     <div className='w-full flex flex-col justify-center items-center px-4 container'>

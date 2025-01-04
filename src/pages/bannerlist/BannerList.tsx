@@ -4,17 +4,7 @@ import { BannerContext } from 'src/context/BannerContext'
 
 const BannerList = () => {
   const { bannerList, handleDelete } = useContext(BannerContext)
-  const arrayTitle = [
-    'Banner ID',
-    'Order',
-    'Banner Name',
-    'Link',
-    'Text',
-    'Date of registration',
-    'Image',
-    'Edit',
-    'Delete'
-  ]
+  const arrayTitle = ['배너ID', '순번', '배너명', '링크', '텍스트', '등록일', '이미지', '수정', '삭제']
 
   const bannerColumnData = bannerList.map((banner) => {
     return {
@@ -30,12 +20,11 @@ const BannerList = () => {
 
   return (
     <>
-      <div className='w-full h-full flex flex-col justify-center item-centers'>
+      <div className='w-full h-full flex flex-col justify-center item-centers container'>
         <div className='flex justify-end mt-3 mr-3'>
           <Link to={'/create'} className='w-fit'>
-            <button className='px-3 py-2 border-[1px] rounded-sm hover:bg-slate-400 hover:text-white'>
-              Create
-            </button>
+            {/* Create new */}
+            <button className='px-3 py-2 border-[1px] rounded-sm hover:bg-slate-400 hover:text-white'>등록</button>
           </Link>
         </div>
 
@@ -57,7 +46,7 @@ const BannerList = () => {
                   <td className='border text-center p-3'>
                     <Link to={`/edit/${item.id}`}>
                       <button className='bg-green-300 border-none px-2 py-1 rounded-md hover:bg-green-500 text-sm text-white'>
-                        Edit
+                      수정
                       </button>
                     </Link>
                   </td>
@@ -66,7 +55,7 @@ const BannerList = () => {
                       onClick={() => handleDelete(item.id)}
                       className='bg-red-400  border-none px-2 py-1 rounded-md hover:bg-red-600 text-sm text-white'
                     >
-                      Delete
+                      삭제
                     </button>
                   </td>
                 </tr>
